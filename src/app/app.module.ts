@@ -16,6 +16,7 @@ import {SharedModule} from './shared/shared.module';
 import {MaterialModule} from './material/material.module';
 import {AssetModule} from './asset/asset.module';
 import {RequestLogInterceptor} from './shared/request-log-interceptor';
+import {ExcelService} from './services/excel.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {RequestLogInterceptor} from './shared/request-log-interceptor';
     SharedModule,
     MaterialModule
   ],
-  providers: [CookieService, {provide: HTTP_INTERCEPTORS, useClass: RequestLogInterceptor, multi: true}],
+  providers: [CookieService, ExcelService, {provide: HTTP_INTERCEPTORS, useClass: RequestLogInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

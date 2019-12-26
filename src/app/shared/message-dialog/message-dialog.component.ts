@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-message-dialog',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-dialog.component.scss']
 })
 export class MessageDialogComponent implements OnInit {
+
+  @Input('message')
+  private message: string;
 
   constructor() { }
 

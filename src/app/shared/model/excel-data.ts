@@ -1,9 +1,21 @@
 import {Employee} from './employee';
 
-export class Asset {
+export class ExcelData {
   sNo: number;
 
-  employee: Employee;
+  empId: string;
+
+  name: string;
+
+  location: string;
+
+  costCenter: string;
+
+  productLine: string;
+
+  jobRole: string;
+
+  technology: string;
 
   model: string;
 
