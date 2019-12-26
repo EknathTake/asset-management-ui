@@ -4,34 +4,34 @@
   <links>
     <ul class="navbar-nav mr-auto">
       <!-- Asset Dropdown -->
-      <li class="nav-item dropdown" dropdown>
+      <li *ngIf="isLogedIn" class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           Assets<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/create">Add Entry</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/summary">Summary</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/list">Details</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/summary">Summary</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/create">Add Entry</a>
         </div>
       </li>
 
       <!-- Asset Reports -->
-      <li class="nav-item dropdown" dropdown>
+      <li *ngIf="isLogedIn" class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
           Reports<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/create">Export to Excel</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="exportToExcel()">Export to Excel</a>
         </div>
       </li>
 
-      <!-- Dropdown -->
+      <!-- Dropdown User Logout-->
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          {{'Welcome User'}}<span class="caret"></span></a>
+          {{'User Action'}}<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Profile</a>
-          <div class="divider dropdown-divider"></div>
+
           <a class="dropdown-item waves-light" mdbWavesEffect *ngIf="!isLogedIn; else logOut" href="login">Login</a>
           <ng-template #logOut>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Profile</a>
             <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>
           </ng-template>
         </div>

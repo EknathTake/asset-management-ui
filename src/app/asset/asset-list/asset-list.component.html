@@ -1,7 +1,14 @@
-<button (click)="exportToExcel()" mat-flat-button color="primary" >Export As Excel</button> <br><br>
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<!--<button (click)="exportToExcel()" mat-flat-button color="primary" >Export As Excel</button> <br><br>-->
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  <div class="col-md-2"></div>
+</div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -86,7 +93,9 @@
 
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef> Action</th>
-    <td mat-cell *matCellDef="let element"> <button mat-button>Action</button> </td>
+    <td mat-cell *matCellDef="let element">
+      <button mat-button>Action</button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
