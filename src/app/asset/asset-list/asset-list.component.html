@@ -1,32 +1,10 @@
-<a mat-flat-button color="primary" href="/asset/create">Create Asset Entry</a> &nbsp; &nbsp;
-<a mat-flat-button color="primary" href="/asset/summary">Summary</a> <br><br>
 <button (click)="exportToExcel()" mat-flat-button color="primary" >Export As Excel</button> <br><br>
-<!--<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>-->
-
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!--
-        data: 'sno'
-        data: 'employee.empId'
-        data: 'employee.firstName'
-        data: 'employee.lastName'
-        data: 'employee.location'
-        data: 'employee.costCenter'
-        data: 'employee.productLine'
-        data: 'employee.jobRole'
-        data: 'employee.technology'
-        data: 'model'
-        data: 'ram'
-        data: 'serialNumber'
-        data: 'assetTag'
-        data: 'dateAllocated'
-        data: 'hostname'
-        data: 'status'
-  -->
-  <!-- Position Column -->
+
   <ng-container matColumnDef="sNo">
     <th mat-header-cell *matHeaderCellDef> SNo.</th>
     <td mat-cell *matCellDef="let element"> {{element.sno}} </td>

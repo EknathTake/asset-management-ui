@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
+import {AssetService} from '../../services/asset.service';
+import {AssetSummary} from '../../shared/model/asset-summary';
+import {AssetDetails} from '../../shared/model/asset-details';
 
 @Component({
   selector: 'app-asset-summary',
@@ -8,27 +11,32 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class AssetSummaryComponent implements OnInit {
 
-  displayedColumns = ['item', 'cost'];
-  dataSource: MatTableDataSource<any>;
-  transactions = [
-    {item: 'Beach ball', cost: 4},
-    {item: 'Towel', cost: 5},
-    {item: 'Frisbee', cost: 2},
-    {item: 'Sunscreen', cost: 4},
-    {item: 'Cooler', cost: 25},
-    {item: 'Swim suit', cost: 15},
-  ];
+  total = 0;
+  total4GB = 0;
+  total8GB = 0;
+  total16GB = 0;
 
-  constructor() {
+  displayedColumns = ['status', 'model', 'ram4GB', 'ram8GB', 'ram16GB', 'total'];
+  dataSource: MatTableDataSource<any>;
+
+  constructor(private assetService: AssetService) {
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<any>(this.transactions);
-  }
+    this.assetService.getSummary().subscribe(summary => {
 
-  /** Gets the total cost of all transactions. */
-  getTotalCost() {
-    return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+      summary.forEach(ss => {
+        this.total += ss.assetDetails.total;
+        this.total4GB += ss.assetDetails.ram4GB;
+        this.total8GB += ss.assetDetails.ram8GB;
+        this.total16GB += ss.assetDetails.ram16GB;
+      });
+
+      const  asm = new AssetSummary();
+      asm.assetDetails = new AssetDetails('Total', '', this.total4GB, this.total8GB, this.total16GB, this.total);
+      summary.push(asm);
+      this.dataSource = new MatTableDataSource<any>(summary);
+    });
   }
 
 }

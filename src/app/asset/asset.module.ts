@@ -7,6 +7,7 @@ import {DataTablesModule} from 'angular-datatables';
 import { AssetSummaryComponent } from './asset-summary/asset-summary.component';
 import {AssetService} from '../services/asset.service';
 import {HttpClientModule} from '@angular/common/http';
+import {CommonModule} from '@angular/common';
 
 
 
@@ -17,7 +18,8 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     DataTablesModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [AssetService]
 })

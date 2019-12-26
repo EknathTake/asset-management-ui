@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material';
 import {AssetResponse} from '../../shared/model/asset-response';
 import {ExcelService} from '../../services/excel.service';
 import {ExcelData} from '../../shared/model/excel-data';
+import {AssetDetails} from '../../shared/model/asset-details';
 
 @Component({
   selector: 'app-asset-list',
@@ -24,12 +25,31 @@ export class AssetListComponent implements OnInit {
     'hostname', 'status', 'action'];
   dataSource: MatTableDataSource<any>;
 
+  assetSummary: AssetDetails[] = [];
+
+  total = 0;
+  total4GB = 0;
+  total8GB = 0;
+  total16GB = 0;
+
   constructor(private assetService: AssetService, private excelService: ExcelService) {
   }
 
   public assetResponse = new Array();
 
   ngOnInit(): void {
+    this.assetService.getSummary().subscribe(summary => {
+      summary.forEach(ss => {
+        this.assetSummary.push(ss.assetDetails);
+        this.total += ss.assetDetails.total;
+        this.total4GB += ss.assetDetails.ram4GB;
+        this.total8GB += ss.assetDetails.ram8GB;
+        this.total16GB += ss.assetDetails.ram16GB;
+      });
+
+      this.assetSummary.push(new AssetDetails('Total', '', this.total4GB, this.total8GB, this.total16GB, this.total));
+    });
+
     this.assetService.getAllAsset().subscribe(response => {
       const res = response as AssetResponse;
       let cnt = 1;
@@ -50,8 +70,6 @@ export class AssetListComponent implements OnInit {
         excelData.dateAllocated = value.dateAllocated;
         excelData.hostname = value.hostname;
         excelData.status = value.status;
-
-
         this.assetResponse.push(excelData);
       });
       this.dataSource = new MatTableDataSource<any>(res.data);
@@ -63,7 +81,8 @@ export class AssetListComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.excelService.exportAsExcelFile(this.assetResponse, 'Enventory_Details');
+    // this.excelService.exportAsExcelFile(this.assetResponse, 'Enventory_Details');
+    this.excelService.toFile(this.assetResponse, this.assetSummary, 'Enventory_Details');
   }
 }
 
