@@ -1,117 +1,157 @@
-
-
-
-
-<section fxLayout="row wrap" fxLayoutAlign="center center">
+<section fxLayout="row wrap" fxLayoutAlign="center center" class="container">
   <mat-card fxFlex="500px" fxFlex.xs="100%">
     <mat-card-title>Create Asset Entry</mat-card-title>
-    <div>{{message}}</div><br>
-    <form [formGroup]="assetForm" autocomplete="off" novalidate (ngSubmit)="createAssetEntry(assetForm.value)"
+    <div>{{message}}</div>
+    <br>
+    <form [formGroup]="assetForm" class="asset-form" autocomplete="off" novalidate
+          (ngSubmit)="createAssetEntry(assetForm.value)"
           fxLayout="column wrap"
           fxLayoutAlign="center center" fxLayoutGap="10px">
       <mat-card-content>
 
-        <!-- Employee Details-->
-        <mat-form-field>
-          <input matInput type="text" placeholder="Employee Id" formControlName="empId" id="empId">
-<!--          <mat-error *ngIf="hasError('empId', 'required')">Name is required</mat-error>-->
-        </mat-form-field>
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td> <!-- Employee Details-->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Employee Id" formControlName="empId" id="empId">
+                <!--          <mat-error *ngIf="hasError('empId', 'required')">Name is required</mat-error>-->
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="First Name" formControlName="firstName" id="firstName">
+                <!--          <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Last Name" formControlName="lastName" id="lastName">
+                <!--          <mat-error *ngIf="hasError('lastName', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="First Name" formControlName="firstName" id="firstName">
-<!--          <mat-error *ngIf="hasError('firstName', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td> <!-- Employee Details-->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Location" formControlName="location" id="location">
+                <!--          <mat-error *ngIf="hasError('location', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Last Name" formControlName="lastName" id="lastName">
-<!--          <mat-error *ngIf="hasError('lastName', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Cost Center" formControlName="costCenter" id="costCenter">
+                <!--          <mat-error *ngIf="hasError('costCenter', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Location" formControlName="location" id="location">
-<!--          <mat-error *ngIf="hasError('location', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td> <!-- Employee Details-->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Product Line" formControlName="productLine" id="productLine">
+                <!--          <mat-error *ngIf="hasError('productLine', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Job Role" formControlName="jobRole" id="jobRole">
+                <!--          <mat-error *ngIf="hasError('jobRole', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Cost Center" formControlName="costCenter" id="costCenter">
-<!--          <mat-error *ngIf="hasError('costCenter', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td> <!-- Employee Details-->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Technology" formControlName="technology" id="technology">
+                <!--          <mat-error *ngIf="hasError('technology', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Product Line" formControlName="productLine" id="productLine">
-<!--          <mat-error *ngIf="hasError('productLine', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+            </td>
+            <td>
+              <!-- Asset Details -->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Model" formControlName="model" id="model">
+                <!--          <mat-error *ngIf="hasError('model', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Job Role" formControlName="jobRole" id="jobRole">
-<!--          <mat-error *ngIf="hasError('jobRole', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td> <!-- Asset Details -->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="RAM" formControlName="ram" id="ram">
+                <!--          <mat-error *ngIf="hasError('ram', 'required')">firstName is required</mat-error>-->
+              </mat-form-field></td>
+            <td> <!-- Employee Details-->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Serial Number" formControlName="serialNumber" id="serialNumber">
+                <!--          <mat-error *ngIf="hasError('serialNumber', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Technology" formControlName="technology" id="technology">
-<!--          <mat-error *ngIf="hasError('technology', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+            </td>
+            <td>
 
-        <!--        <mat-form-field>-->
-        <!--          <input matInput [matDatepicker]="picker" placeholder="Choose a date of birth" formControlName="dateOfBirth" id="dateOfBirth"-->
-        <!--                 readonly (click)="picker.open()">-->
-        <!--          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-        <!--          <mat-datepicker #picker></mat-datepicker>-->
-        <!--        </mat-form-field>-->
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Asset Tag" formControlName="assetTag" id="assetTag">
+                <!--          <mat-error *ngIf="hasError('assetTag', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
 
-        <!-- Asset Details -->
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td> <!-- Employee Details-->
+              <mat-form-field class="full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Date Allocated" formControlName="dateAllocated"
+                       id="dateAllocated"
+                       readonly (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Hostname" formControlName="hostname" id="hostname">
+                <!--          <mat-error *ngIf="hasError('hostname', 'required')">firstName is required</mat-error>-->
+              </mat-form-field>
+            </td>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Model" formControlName="model" id="model">
-<!--          <mat-error *ngIf="hasError('model', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+            <td><mat-form-field class="full-width">
+              <!--          <input matInput type="text" placeholder="Status" formControlName="status" id="status">-->
+              <!--          <mat-error *ngIf="hasError('hostname', 'required')">firstName is required</mat-error>-->
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="RAM" formControlName="ram" id="ram">
-<!--          <mat-error *ngIf="hasError('ram', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" placeholder="Serial Number" formControlName="serialNumber" id="serialNumber">
-<!--          <mat-error *ngIf="hasError('serialNumber', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" placeholder="Asset Tag" formControlName="assetTag" id="assetTag">
-<!--          <mat-error *ngIf="hasError('assetTag', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status" id="status">
+                <mat-option value="Allocated">Allocated</mat-option>
+                <mat-option value="Inventory">Inventory</mat-option>
+                <mat-option value="Inventory - not working">Inventory - not working</mat-option>
+              </mat-select>
+            </mat-form-field></td>
+          </tr>
+        </table>
 
 
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Date Allocated" formControlName="dateAllocated"
-                 id="dateAllocated"
-                 readonly (click)="picker.open()">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="text" placeholder="Hostname" formControlName="hostname" id="hostname">
-          <!--          <mat-error *ngIf="hasError('hostname', 'required')">firstName is required</mat-error>-->
-        </mat-form-field>
 
-        <mat-form-field>
-<!--          <input matInput type="text" placeholder="Status" formControlName="status" id="status">-->
-          <!--          <mat-error *ngIf="hasError('hostname', 'required')">firstName is required</mat-error>-->
 
-          <mat-label>Status</mat-label>
-          <mat-select formControlName="status" id="status">
-            <mat-option value="Allocated">Allocated</mat-option>
-            <mat-option value="Inventory">Inventory</mat-option>
-            <mat-option value="Inventory - not working">Inventory - not working</mat-option>
-          </mat-select>
-        </mat-form-field>
 
 
       </mat-card-content>
       <mat-card-actions align="center">
         <button mat-raised-button color="primary" [disabled]="!assetForm.valid">Create</button>
-<!--        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>-->
+        <!--        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>-->
       </mat-card-actions>
     </form>
   </mat-card>
