@@ -1,13 +1,9 @@
 <!--<button (click)="exportToExcel()" mat-flat-button color="primary" >Export As Excel</button> <br><br>-->
 
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
+<div class="container">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
-  </div>
-  <div class="col-md-2"></div>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
