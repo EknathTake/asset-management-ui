@@ -84,7 +84,23 @@ export class NavbarComponent implements OnInit {
 
   exportToExcel() {
     // this.excelService.exportAsExcelFile(this.assetResponse, 'Enventory_Details');
-    this.excelService.toFile(this.assetResponse, this.assetSummary, 'Enventory_Details');
+    const available = this.filterAssetDetailsByStatus('Allocated');
+    const inventory = this.filterAssetDetailsByStatus('Inventory');
+    const nw = this.filterAssetDetailsByStatus('Inventory - not working');
+    const discarded = this.filterAssetDetailsByStatus('Discarded');
+
+    this.excelService.toFile(this.assetResponse, available, inventory, nw, discarded, this.assetSummary, 'Enventory_Details');
+  }
+
+  filterAssetDetailsByStatus(status: string): ExcelData[] {
+
+    const ssdata: ExcelData[] = [];
+    this.assetResponse.forEach(ss => {
+      if (ss.status === status) {
+        ssdata.push(ss);
+      }
+    });
+    return ssdata;
   }
 
 }

@@ -15,6 +15,7 @@ import {MaterialModule} from './material/material.module';
 import {RequestLogInterceptor} from './shared/request-log-interceptor';
 import {ExcelService} from './services/excel.service';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
     HttpClientModule,
     SharedModule,
     MaterialModule,
+    AngularFontAwesomeModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [CookieService, ExcelService, {provide: HTTP_INTERCEPTORS, useClass: RequestLogInterceptor, multi: true}],

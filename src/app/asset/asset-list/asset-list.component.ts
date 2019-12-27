@@ -35,7 +35,7 @@ export class AssetListComponent implements OnInit {
   constructor(private assetService: AssetService, private excelService: ExcelService) {
   }
 
-  public assetResponse = new Array();
+  public assetResponse: ExcelData[] = [];
 
   ngOnInit(): void {
     this.assetService.getSummary().subscribe(summary => {
@@ -50,6 +50,25 @@ export class AssetListComponent implements OnInit {
       this.assetSummary.push(new AssetDetails('Total', '', this.total4GB, this.total8GB, this.total16GB, this.total));
     });
 
+    this.getAssetDetails();
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  filterAssetDetailsByStatus(status: string): ExcelData[] {
+
+    const ssdata: ExcelData[] = [];
+    this.assetResponse.forEach(ss => {
+      if (ss.status === status) {
+        ssdata.push(ss);
+      }
+    });
+    return ssdata;
+  }
+
+  getAssetDetails() {
     this.assetService.getAllAsset().subscribe(response => {
       const res = response as AssetResponse;
       let cnt = 1;
@@ -76,13 +95,14 @@ export class AssetListComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   exportToExcel() {
     // this.excelService.exportAsExcelFile(this.assetResponse, 'Enventory_Details');
-    this.excelService.toFile(this.assetResponse, this.assetSummary, 'Enventory_Details');
+    const available = this.filterAssetDetailsByStatus('Allocated');
+    const inventory = this.filterAssetDetailsByStatus('Inventory');
+    const nw = this.filterAssetDetailsByStatus('Inventory - not working');
+    const discarded = this.filterAssetDetailsByStatus('Discarded');
+
+    this.excelService.toFile(this.assetResponse, available, inventory, nw, discarded, this.assetSummary, 'Enventory_Details');
   }
 }
 

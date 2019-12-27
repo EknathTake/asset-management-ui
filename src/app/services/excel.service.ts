@@ -17,11 +17,23 @@ export class ExcelService {
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
-  toFile(json: any[], json1: any[], fileName: string) {
+  toFile(general: any[], json: any[], json2: any[], json3: any[], json4: any[], json1: any[], fileName: string) {
     const workbook = XLSX.utils.book_new();
+
+    const gws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(general);
+    XLSX.utils.book_append_sheet(workbook, gws, 'General');
 
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Allocation');
+
+    const worksheet2: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json2);
+    XLSX.utils.book_append_sheet(workbook, worksheet2, 'Inventory');
+
+    const worksheet3: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json3);
+    XLSX.utils.book_append_sheet(workbook, worksheet3, 'Inventory - Not Working');
+
+    const worksheet4: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json4);
+    XLSX.utils.book_append_sheet(workbook, worksheet4, 'Discarded');
 
     const worksheet1: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json1);
     XLSX.utils.book_append_sheet(workbook, worksheet1, 'Sumary');
