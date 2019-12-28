@@ -15,8 +15,12 @@ export class Asset {
 
   dateAllocated: string;
 
+  dateOfReturn: string;
+
   hostname: string;
 
   status: string;
+
+  remark: string;
 
 }

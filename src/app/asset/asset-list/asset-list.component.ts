@@ -5,6 +5,7 @@ import {AssetResponse} from '../../shared/model/asset-response';
 import {ExcelService} from '../../services/excel.service';
 import {ExcelData} from '../../shared/model/excel-data';
 import {AssetDetails} from '../../shared/model/asset-details';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-asset-list',
@@ -21,21 +22,20 @@ export class AssetListComponent implements OnInit {
     'jobRole',
     'technology',
     'model', 'ram', 'serialNumber',
-    'assetTag', 'dateAllocated',
+    'assetTag', 'dateAllocated', 'dateOfReturned',
     'hostname', 'status', 'action'];
+
   dataSource: MatTableDataSource<any>;
-
   assetSummary: AssetDetails[] = [];
-
   total = 0;
   total4GB = 0;
   total8GB = 0;
   total16GB = 0;
+  assetResponse: ExcelData[] = [];
 
-  constructor(private assetService: AssetService, private excelService: ExcelService) {
+  constructor(private assetService: AssetService, private excelService: ExcelService, public datepipe: DatePipe) {
+    // this.sortedData = this.assetResponse.slice();
   }
-
-  public assetResponse: ExcelData[] = [];
 
   ngOnInit(): void {
     this.assetService.getSummary().subscribe(summary => {
@@ -54,7 +54,9 @@ export class AssetListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   filterAssetDetailsByStatus(status: string): ExcelData[] {
@@ -86,16 +88,18 @@ export class AssetListComponent implements OnInit {
         excelData.ram = value.ram;
         excelData.serialNumber = value.serialNumber;
         excelData.assetTag = value.assetTag;
-        excelData.dateAllocated = value.dateAllocated;
+        excelData.dateAllocated = this.datepipe.transform(value.dateAllocated, 'dd/MM/yyyy');
+        excelData.dateReturned = this.datepipe.transform(value.dateOfReturn, 'dd/MM/yyyy');
         excelData.hostname = value.hostname;
         excelData.status = value.status;
+        excelData.remark = value.remark;
         this.assetResponse.push(excelData);
       });
       this.dataSource = new MatTableDataSource<any>(res.data);
     });
   }
 
-  exportToExcel() {
+  /*exportToExcel() {
     // this.excelService.exportAsExcelFile(this.assetResponse, 'Enventory_Details');
     const available = this.filterAssetDetailsByStatus('Allocated');
     const inventory = this.filterAssetDetailsByStatus('Inventory');
@@ -103,7 +107,7 @@ export class AssetListComponent implements OnInit {
     const discarded = this.filterAssetDetailsByStatus('Discarded');
 
     this.excelService.toFile(this.assetResponse, available, inventory, nw, discarded, this.assetSummary, 'Enventory_Details');
-  }
+  }*/
 }
 
 

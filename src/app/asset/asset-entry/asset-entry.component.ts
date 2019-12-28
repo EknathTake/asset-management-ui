@@ -14,6 +14,8 @@ export class AssetEntryComponent implements OnInit {
   public assetForm: FormGroup;
   private dialogConfig;
   public message: string;
+  selectedStatus = 'Allocated';
+  isAllocationDateVisible = false;
 
   constructor(private dialog: MatDialog, private assetService: AssetService) {
   }
@@ -28,14 +30,15 @@ export class AssetEntryComponent implements OnInit {
       productLine: new FormControl('', []),
       jobRole: new FormControl('', []),
       technology: new FormControl('', []),
-      model: new FormControl('', []),
-      ram: new FormControl('', []),
-      serialNumber: new FormControl('', []),
-      assetTag: new FormControl('', []),
+      model: new FormControl('', [Validators.required]),
+      ram: new FormControl('', [Validators.required]),
+      serialNumber: new FormControl('', [Validators.required]),
+      assetTag: new FormControl('', [Validators.required]),
       dateAllocated: new FormControl('', []),
+      dateOfReturn: new FormControl('', []),
       hostname: new FormControl('', []),
-      status: new FormControl('', []),
-      dateOfBirth: new FormControl(new Date())
+      status: new FormControl('', [Validators.required]),
+      remark: new FormControl('', [])
       // address: new FormControl('', [Validators.required, Validators.maxLength(100)])
     });
 
@@ -49,13 +52,13 @@ export class AssetEntryComponent implements OnInit {
 
   public hasError = (controlName: string, errorName: string) => {
     return this.assetForm.controls[controlName].hasError(errorName);
-  };
+  }
 
   public createAssetEntry = (assetFormValue) => {
     if (this.assetForm.valid) {
       this.executeAssetCreation(assetFormValue);
     }
-  };
+  }
 
   private executeAssetCreation = (assetForm) => {
     const asset: Asset = {
@@ -75,8 +78,10 @@ export class AssetEntryComponent implements OnInit {
       serialNumber: assetForm.serialNumber,
       assetTag: assetForm.assetTag,
       dateAllocated: assetForm.dateAllocated,
+      dateOfReturn: assetForm.dateOfReturn,
       status: assetForm.status,
-      hostname: assetForm.hostname
+      hostname: assetForm.hostname,
+      remark: assetForm.remark
     };
 
     this.assetService.createAsset(asset)
@@ -84,6 +89,13 @@ export class AssetEntryComponent implements OnInit {
         res => this.message = 'Asset entry created successfully',
         error => this.message = 'Error occured while creating Asset entry.'
       );
-  };
+  }
 
+  setVisibilityForDate(event) {
+    if (this.selectedStatus === 'Allocated') {
+      this.isAllocationDateVisible = true;
+    } else {
+      this.isAllocationDateVisible = false;
+    }
+  }
 }

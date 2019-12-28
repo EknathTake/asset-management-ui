@@ -1,100 +1,102 @@
 <!--<button (click)="exportToExcel()" mat-flat-button color="primary" >Export As Excel</button> <br><br>-->
-
 <div class="container">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
 </div>
+  <mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="sNo">
+      <th mat-header-cell *matHeaderCellDef> SNo.</th>
+      <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="sNo">
-    <th mat-header-cell *matHeaderCellDef> SNo.</th>
-    <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="empId">
+      <th mat-header-cell *matHeaderCellDef> empId</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.empId}} </td>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="empId">
-    <th mat-header-cell *matHeaderCellDef> empId</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.empId}} </td>
-  </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.firstName}} {{element.employee.lastName}} </td>
+    </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.firstName}} {{element.employee.lastName}} </td>
-  </ng-container>
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef> Location</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.location}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef> Location</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.location}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="costCenter">
-    <th mat-header-cell *matHeaderCellDef> Cost Center</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.costCenter}} </td>
-  </ng-container>
-
-
-  <ng-container matColumnDef="productLine">
-    <th mat-header-cell *matHeaderCellDef> Product Line</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.productLine}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="jobRole">
-    <th mat-header-cell *matHeaderCellDef> Job Role</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.jobRole}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="technology">
-    <th mat-header-cell *matHeaderCellDef> Technology</th>
-    <td mat-cell *matCellDef="let element"> {{element.employee.technology}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="ram">
-    <th mat-header-cell *matHeaderCellDef> RAM (in GB)</th>
-    <td mat-cell *matCellDef="let element"> {{element.ram}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="model">
-    <th mat-header-cell *matHeaderCellDef> Model</th>
-    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="serialNumber">
-    <th mat-header-cell *matHeaderCellDef> Serial Number</th>
-    <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="assetTag">
-    <th mat-header-cell *matHeaderCellDef> Asset Tag</th>
-    <td mat-cell *matCellDef="let element"> {{element.assetTag}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="dateAllocated">
-    <th mat-header-cell *matHeaderCellDef> Date Allocated</th>
-    <td mat-cell *matCellDef="let element"> {{element.dateAllocated}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="hostname">
-    <th mat-header-cell *matHeaderCellDef> Hostname</th>
-    <td mat-cell *matCellDef="let element"> {{element.hostname}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status</th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-  </ng-container>
+    <ng-container matColumnDef="costCenter">
+      <th mat-header-cell *matHeaderCellDef> Cost Center</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.costCenter}} </td>
+    </ng-container>
 
 
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef> Action</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-button>Action</button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="productLine">
+      <th mat-header-cell *matHeaderCellDef> Product Line</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.productLine}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container matColumnDef="jobRole">
+      <th mat-header-cell *matHeaderCellDef> Job Role</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.jobRole}} </td>
+    </ng-container>
 
+    <ng-container matColumnDef="technology">
+      <th mat-header-cell *matHeaderCellDef> Technology</th>
+      <td mat-cell *matCellDef="let element"> {{element.employee.technology}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ram">
+      <th mat-header-cell *matHeaderCellDef> RAM (in GB)</th>
+      <td mat-cell *matCellDef="let element"> {{element.ram}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> Model</th>
+      <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef> Serial Number</th>
+      <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assetTag">
+      <th mat-header-cell *matHeaderCellDef> Asset Tag</th>
+      <td mat-cell *matCellDef="let element"> {{element.assetTag}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateAllocated">
+      <th mat-header-cell *matHeaderCellDef> Date Allocated</th>
+      <td mat-cell *matCellDef="let element"> {{element.dateAllocated | date : 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateOfReturned">
+      <th mat-header-cell *matHeaderCellDef> Date of Returned</th>
+      <td mat-cell *matCellDef="let element"> {{element.dateReturned | date : 'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hostname">
+      <th mat-header-cell *matHeaderCellDef> Hostname</th>
+      <td mat-cell *matCellDef="let element"> {{element.hostname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status</th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button>Action</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>

@@ -27,8 +27,12 @@ export class ExcelData {
 
   dateAllocated: string;
 
+  dateReturned: string;
+
   hostname: string;
 
   status: string;
+
+  remark: string;
 
 }

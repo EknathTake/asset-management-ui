@@ -7,7 +7,7 @@ import {DataTablesModule} from 'angular-datatables';
 import { AssetSummaryComponent } from './asset-summary/asset-summary.component';
 import {AssetService} from '../services/asset.service';
 import {HttpClientModule} from '@angular/common/http';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 
 
@@ -21,6 +21,6 @@ import {CommonModule} from '@angular/common';
     HttpClientModule,
     CommonModule
   ],
-  providers: [AssetService]
+  providers: [AssetService, DatePipe]
 })
 export class AssetModule { }

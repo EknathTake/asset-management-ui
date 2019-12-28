@@ -8,6 +8,7 @@ import {ExcelData} from '../shared/model/excel-data';
 import {MatTableDataSource} from '@angular/material';
 import {AssetService} from '../services/asset.service';
 import {ExcelService} from '../services/excel.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -26,7 +27,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(private userAuth: UserAuthService,
               private router: Router, private cookieService: CookieService,
-              private assetService: AssetService, private excelService: ExcelService) {
+              private assetService: AssetService, private excelService: ExcelService,
+              public datepipe: DatePipe) {
     router.events.subscribe((val) => {
 
       if (this.userAuth.currentUserValue) {
@@ -69,9 +71,11 @@ export class NavbarComponent implements OnInit {
         excelData.ram = value.ram;
         excelData.serialNumber = value.serialNumber;
         excelData.assetTag = value.assetTag;
-        excelData.dateAllocated = value.dateAllocated;
+        excelData.dateAllocated = this.datepipe.transform(value.dateAllocated, 'dd/MM/yyyy');
+        excelData.dateReturned = this.datepipe.transform(value.dateOfReturn, 'dd/MM/yyyy');
         excelData.hostname = value.hostname;
         excelData.status = value.status;
+        excelData.remark = value.remark;
         this.assetResponse.push(excelData);
       });
     });
@@ -87,9 +91,8 @@ export class NavbarComponent implements OnInit {
     const available = this.filterAssetDetailsByStatus('Allocated');
     const inventory = this.filterAssetDetailsByStatus('Inventory');
     const nw = this.filterAssetDetailsByStatus('Inventory - not working');
-    const discarded = this.filterAssetDetailsByStatus('Discarded');
 
-    this.excelService.toFile(this.assetResponse, available, inventory, nw, discarded, this.assetSummary, 'Enventory_Details');
+    this.excelService.toFile(this.assetResponse, available, inventory, nw, this.assetSummary, 'Enventory_Details');
   }
 
   filterAssetDetailsByStatus(status: string): ExcelData[] {

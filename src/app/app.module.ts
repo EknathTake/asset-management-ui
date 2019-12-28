@@ -16,6 +16,7 @@ import {RequestLogInterceptor} from './shared/request-log-interceptor';
 import {ExcelService} from './services/excel.service';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     AngularFontAwesomeModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [CookieService, ExcelService, {provide: HTTP_INTERCEPTORS, useClass: RequestLogInterceptor, multi: true}],
+  providers: [CookieService, ExcelService, {provide: HTTP_INTERCEPTORS, useClass: RequestLogInterceptor, multi: true}, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {
