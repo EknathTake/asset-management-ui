@@ -4,7 +4,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 </div>
-  <mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
 
     <ng-container matColumnDef="sNo">
       <th mat-header-cell *matHeaderCellDef> SNo.</th>
@@ -99,4 +99,4 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </mat-table>
+  </table>
