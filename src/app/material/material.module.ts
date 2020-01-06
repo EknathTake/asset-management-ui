@@ -29,12 +29,12 @@ import {
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule,
     CommonModule,
     MatTabsModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   exports: [MatDialogModule,
     MatDatepickerModule,
@@ -54,10 +54,10 @@ import {
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule,
     MatTabsModule,
     MatSidenavModule,
-  MatToolbarModule,
+    MatToolbarModule,
+    MatDialogModule,
     MatStepperModule]
 })
 export class MaterialModule {

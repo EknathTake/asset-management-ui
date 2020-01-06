@@ -6,33 +6,36 @@
       <!-- Asset Dropdown -->
       <li *ngIf="isLogedIn" class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Assets<span class="caret"></span></a>
+          Assets <i class="fa fa-laptop" aria-hidden="true"></i><span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/list">Details</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/summary">Summary</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/create">Add Entry</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/list"><i class="fa fa-list" aria-hidden="true"></i> All Assets</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/create"><i class="fa fa-plus" aria-hidden="true"></i> Add Asset </a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/summary"><i class="fa fa-pie-chart" aria-hidden="true"></i> Asset Summary</a>
         </div>
       </li>
 
       <!-- Asset Reports -->
       <li *ngIf="isLogedIn" class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Reports<span class="caret"></span></a>
+          Reports <span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect (click)="exportToExcel()">Export to Excel</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="exportToExcel()"><i
+            class="fa fa-file-excel-o" aria-hidden="true"></i> Export to Excel </a>
         </div>
       </li>
 
       <!-- Dropdown User Logout-->
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <fa name="user"></fa> <span class="caret"></span></a>
+          User
+          <fa name="user"></fa>
+          <span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
 
           <a class="dropdown-item waves-light" mdbWavesEffect *ngIf="!isLogedIn; else logOut" href="login">Login</a>
           <ng-template #logOut>
-            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Profile</a>
-            <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Profile</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
           </ng-template>
         </div>
       </li>

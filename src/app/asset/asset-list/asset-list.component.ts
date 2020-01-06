@@ -1,11 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AssetService} from '../../services/asset.service';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AssetResponse} from '../../shared/model/asset-response';
 import {ExcelService} from '../../services/excel.service';
 import {ExcelData} from '../../shared/model/excel-data';
 import {AssetDetails} from '../../shared/model/asset-details';
 import {DatePipe} from '@angular/common';
+import {DialogComponent} from '../../shared/dialog/dialog.component';
+import {Asset} from '../../shared/model/asset';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-asset-list',
@@ -13,14 +16,10 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./asset-list.component.scss']
 })
 export class AssetListComponent implements OnInit {
-  displayedColumns: string[] = ['sNo',
+  displayedColumns: string[] = [
     'empId',
     'name',
-    'location',
-    'costCenter',
-    'productLine',
     'jobRole',
-    'technology',
     'model', 'ram', 'serialNumber',
     'assetTag', 'dateAllocated', 'dateOfReturned',
     'hostname', 'status', 'action'];
@@ -32,14 +31,23 @@ export class AssetListComponent implements OnInit {
   total8GB = 0;
   total16GB = 0;
   assetResponse: ExcelData[] = [];
+  newAssetDetails: Asset;
+  statuses = new Set();
 
-  constructor(private assetService: AssetService, private excelService: ExcelService, public datepipe: DatePipe) {
-    // this.sortedData = this.assetResponse.slice();
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor(private assetService: AssetService,
+              public datepipe: DatePipe,
+              public dialog: MatDialog,
+              public router: Router) {
+    this.getAssetDetails();
   }
 
   ngOnInit(): void {
     this.assetService.getSummary().subscribe(summary => {
       summary.forEach(ss => {
+        this.statuses.add(ss.assetDetails.status);
         this.assetSummary.push(ss.assetDetails);
         this.total += ss.assetDetails.total;
         this.total4GB += ss.assetDetails.ram4GB;
@@ -51,23 +59,15 @@ export class AssetListComponent implements OnInit {
     });
 
     this.getAssetDetails();
+
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
-  filterAssetDetailsByStatus(status: string): ExcelData[] {
-
-    const ssdata: ExcelData[] = [];
-    this.assetResponse.forEach(ss => {
-      if (ss.status === status) {
-        ssdata.push(ss);
-      }
-    });
-    return ssdata;
+  applyFilter(filterValue: any) {
+    if (filterValue) {
+      filterValue = filterValue.trim(); // Remove whitespace
+      filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+      this.dataSource.filter = filterValue;
+    }
   }
 
   getAssetDetails() {
@@ -96,18 +96,29 @@ export class AssetListComponent implements OnInit {
         this.assetResponse.push(excelData);
       });
       this.dataSource = new MatTableDataSource<any>(res.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
-  /*exportToExcel() {
-    // this.excelService.exportAsExcelFile(this.assetResponse, 'Enventory_Details');
-    const available = this.filterAssetDetailsByStatus('Allocated');
-    const inventory = this.filterAssetDetailsByStatus('Inventory');
-    const nw = this.filterAssetDetailsByStatus('Inventory - not working');
-    const discarded = this.filterAssetDetailsByStatus('Discarded');
+  openDialog(element: Asset): void {
+    console.log('selected element: ', element);
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '37%',
+      data: element
+    });
 
-    this.excelService.toFile(this.assetResponse, available, inventory, nw, discarded, this.assetSummary, 'Enventory_Details');
-  }*/
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      this.newAssetDetails = result;
+    });
+  }
+
+  deleteElement(sequenceNumber: any) {
+    this.assetService.removeAssetWithId(sequenceNumber).subscribe(s => {
+      this.router.navigateByUrl('/asset/list').then(r => console.log('Inside deleteElement: ', r));
+    });
+  }
 }
 
 

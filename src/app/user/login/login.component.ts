@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserAuthService} from '../../services/userauth.service';
-import {CookieService} from 'ngx-cookie-service';
-import {TokenReponse} from '../../shared/model/token-reponse';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -34,7 +32,7 @@ export class LoginComponent implements OnInit {
 
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
   public login = (loginFormValue) => {
@@ -47,9 +45,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['asset/list']);
         // location.href = 'http://localhost:4200/home';
       }, error => {
-        this.errorMessage = 'Login failed, try again later.';
+        this.errorMessage = 'Login failed, try again later.', error;
       });
     }
-  };
+  }
 }
 

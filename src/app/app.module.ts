@@ -9,7 +9,6 @@ import {FormsModule} from '@angular/forms';
 import {NavbarComponent} from './navbar/navbar.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {MessageDialogComponent} from './shared/message-dialog/message-dialog.component';
 import {SharedModule} from './shared/shared.module';
 import {MaterialModule} from './material/material.module';
 import {RequestLogInterceptor} from './shared/request-log-interceptor';
@@ -21,8 +20,7 @@ import {DatePipe} from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    MessageDialogComponent
+    NavbarComponent
   ],
   imports: [
     FormsModule,

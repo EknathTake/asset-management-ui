@@ -28,8 +28,14 @@ export class AssetService {
     return this.http.post(this.baseUrl$ + '/asset', asset, {headers: this.header});
   }
 
-  getSummary(): Observable<AssetSummary[]>{
+  getSummary(): Observable<AssetSummary[]> {
     return this.http.get<AssetSummary[]>(this.baseUrl$ + '/asset/summary', {
+      headers: this.header
+    });
+  }
+
+  removeAssetWithId(sequenceNumber: any) {
+    return this.http.delete<AssetSummary[]>(this.baseUrl$ + '/asset/summary/' + sequenceNumber, {
       headers: this.header
     });
   }

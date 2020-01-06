@@ -2,15 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MaterialModule} from '../material/material.module';
 import {AssetModule} from '../asset/asset.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [DialogComponent],
   imports: [
     MaterialModule,
-    AssetModule
-  ]
+    AssetModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    DialogComponent
+  ],
 })
 export class SharedModule { }
