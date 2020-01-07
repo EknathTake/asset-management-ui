@@ -121,7 +121,7 @@
 
           <td *ngIf="isAllocationDateVisible; else dateOfReturn" [(ngModel)]="data.dateAllocated"> <!-- Employee Details-->
             <mat-form-field class="full-width">
-              <input matInput [matDatepicker]="picker" placeholder="Date Allocated" formControlName="dateAllocated"
+              <input matInput [matDatepicker]="picker" [(ngModel)]="data.dateAllocated" placeholder="Date Allocated" formControlName="dateAllocated"
                      id="dateAllocated"
                      readonly (click)="picker.open()">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -167,7 +167,3 @@
     </mat-card-actions>
   </form>
 </div>
-<!--<div mat-dialog-actions>-->
-<!--  <button mat-button (click)="onNoClick()">Cancel</button>-->
-<!--  <button mat-button [mat-dialog-close]="data.model" cdkFocusInitial>Ok</button>-->
-<!--</div>-->

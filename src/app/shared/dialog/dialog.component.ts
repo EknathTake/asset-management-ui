@@ -84,12 +84,11 @@ export class DialogComponent {
       remark: assetForm.remark
     };
 
-    // this.assetService.createAsset(asset)
-    //   .subscribe(
-    //     res => this.message = 'Asset entry created successfully',
-    //     error => this.message = 'Error occured while creating Asset entry.'
-    //   );
-
+    this.assetService.createAsset(asset)
+       .subscribe(
+         res => this.message = 'Asset entry update successfully',
+         error => this.message = 'Error occured while creating Asset entry.'
+       );
     console.log('modified asset: ', assetForm);
   }
 

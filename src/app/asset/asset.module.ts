@@ -8,6 +8,8 @@ import { AssetSummaryComponent } from './asset-summary/asset-summary.component';
 import {AssetService} from '../services/asset.service';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule, DatePipe} from '@angular/common';
+import {ConfirmService} from '../services/confirm.service';
+import {ConfirmBoxComponent} from '../shared/confirm-box/confirm-box.component';
 
 
 
@@ -20,7 +22,9 @@ import {CommonModule, DatePipe} from '@angular/common';
     DataTablesModule,
     HttpClientModule,
     CommonModule
+  ], entryComponents: [
+    ConfirmBoxComponent
   ],
-  providers: [AssetService, DatePipe]
+  providers: [AssetService, DatePipe, ConfirmService]
 })
 export class AssetModule { }

@@ -4,11 +4,12 @@ import {MaterialModule} from '../material/material.module';
 import {AssetModule} from '../asset/asset.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogComponent } from './dialog/dialog.component';
+import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
 
 
 
 @NgModule({
-  declarations: [DialogComponent],
+  declarations: [DialogComponent, ConfirmBoxComponent],
   imports: [
     MaterialModule,
     AssetModule,

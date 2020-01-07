@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Asset} from '../shared/model/asset';
 import {AssetResponse} from '../shared/model/asset-response';
 import {AssetSummary} from '../shared/model/asset-summary';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,17 @@ export class AssetService {
   }
 
   removeAssetWithId(sequenceNumber: any) {
-    return this.http.delete<AssetSummary[]>(this.baseUrl$ + '/asset/summary/' + sequenceNumber, {
+    return this.http.delete<any>(this.baseUrl$ + '/asset/' + sequenceNumber, {
       headers: this.header
-    });
+    }).pipe(
+      catchError((error: any) => {
+        console.error(error);
+        return of();
+      }),
+    );;
+  }
+
+  updateAsset(element: Asset) {
+    return this.http.put(this.baseUrl$ + '/asset', element, { headers: this.header});
   }
 }

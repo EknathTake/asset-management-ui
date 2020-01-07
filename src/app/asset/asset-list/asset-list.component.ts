@@ -2,13 +2,15 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AssetService} from '../../services/asset.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AssetResponse} from '../../shared/model/asset-response';
-import {ExcelService} from '../../services/excel.service';
 import {ExcelData} from '../../shared/model/excel-data';
 import {AssetDetails} from '../../shared/model/asset-details';
 import {DatePipe} from '@angular/common';
 import {DialogComponent} from '../../shared/dialog/dialog.component';
 import {Asset} from '../../shared/model/asset';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
+import {ConfirmService} from '../../services/confirm.service';
 
 @Component({
   selector: 'app-asset-list',
@@ -17,6 +19,7 @@ import {Router} from '@angular/router';
 })
 export class AssetListComponent implements OnInit {
   displayedColumns: string[] = [
+    'sNo',
     'empId',
     'name',
     'jobRole',
@@ -33,6 +36,8 @@ export class AssetListComponent implements OnInit {
   assetResponse: ExcelData[] = [];
   newAssetDetails: Asset;
   statuses = new Set();
+  idColumn = 'sno';
+  private dsData: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -40,7 +45,8 @@ export class AssetListComponent implements OnInit {
   constructor(private assetService: AssetService,
               public datepipe: DatePipe,
               public dialog: MatDialog,
-              public router: Router) {
+              public router: Router,
+              public confirmService: ConfirmService) {
     this.getAssetDetails();
   }
 
@@ -101,23 +107,54 @@ export class AssetListComponent implements OnInit {
     });
   }
 
-  openDialog(element: Asset): void {
-    console.log('selected element: ', element);
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '37%',
-      data: element
-    });
+  editRecord(element: any): void {
+    const record = this.dataSource.data.find(obj => obj[this.idColumn] === element.sno);
+    if (record) {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '37%',
+        data: element
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-      this.newAssetDetails = result;
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        this.newAssetDetails = result;
+        this.assetService.updateAsset(element).subscribe(response => {
+          console.log('after update: ', response);
+        }, error => console.error(error));
+      });
+    }
   }
 
-  deleteElement(sequenceNumber: any) {
-    this.assetService.removeAssetWithId(sequenceNumber).subscribe(s => {
-      this.router.navigateByUrl('/asset/list').then(r => console.log('Inside deleteElement: ', r));
-    });
+  public deleteRecord(recordId) {
+    // For delete confirm dialog in deleteItem to match the db column name to fetch.
+    const name2 = 'model';
+    const record = this.dataSource.data.find(obj => obj[this.idColumn] === recordId);
+    const name = 'Delete Asset' + record[name2] + '?';
+
+    // Call the confirm dialog component
+    this.confirmService.confirm(name, 'This action is final. Gone forever!').pipe(
+      switchMap(res => {
+        if (res === true) {
+          return this.assetService.removeAssetWithId(recordId);
+        }
+      }))
+      .subscribe(
+        result => {
+          // Refresh DataTable to remove row.
+          this.deleteRowDataTable(recordId, this.idColumn, this.paginator, this.dataSource);
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err.error);
+          console.log(err.message);
+        }
+      );
+  }
+
+  // Remove the deleted row from the data table. Need to remove from the downloaded data first.
+  private deleteRowDataTable(recordId, idColumn, paginator, dataSource) {
+    this.dsData = dataSource.data;
+    const itemIndex = this.dsData.findIndex(obj => obj[idColumn] === recordId);
+    dataSource.data.splice(itemIndex, 1);
+    dataSource.paginator = paginator;
   }
 }
 
