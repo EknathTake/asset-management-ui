@@ -10,7 +10,7 @@ import {AssetService} from '../../services/asset.service';
   styleUrls: ['./asset-entry.component.scss']
 })
 export class AssetEntryComponent implements OnInit {
-
+  /** form group*/
   public assetForm: FormGroup;
   private dialogConfig;
   public message: string;
