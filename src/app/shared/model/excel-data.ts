@@ -3,9 +3,29 @@ import {Employee} from './employee';
 export class ExcelData {
   sNo: number;
 
+  assetTag: string;
+
+  model: string;
+
+  ram: string;
+
+  dateOfPurchase: string;
+
+  isUnderWarranty: boolean;
+
+  isDamaged: boolean;
+
+  isRepaired: boolean;
+
+  serialNumber: string;
+
   empId: string;
 
   name: string;
+
+  dateAllocated: string;
+
+  dateReturned: string;
 
   location: string;
 
@@ -16,18 +36,6 @@ export class ExcelData {
   jobRole: string;
 
   technology: string;
-
-  model: string;
-
-  ram: string;
-
-  serialNumber: string;
-
-  assetTag: string;
-
-  dateAllocated: string;
-
-  dateReturned: string;
 
   hostname: string;
 

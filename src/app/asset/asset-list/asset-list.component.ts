@@ -1,39 +1,31 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AssetService} from '../../services/asset.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {AssetResponse} from '../../shared/model/asset-response';
-import {ExcelData} from '../../shared/model/excel-data';
 import {AssetDetails} from '../../shared/model/asset-details';
-import {DatePipe} from '@angular/common';
-import {DialogComponent} from '../../shared/dialog/dialog.component';
+import {ExcelData} from '../../shared/model/excel-data';
 import {Asset} from '../../shared/model/asset';
 import {Router} from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
-import {switchMap} from 'rxjs/operators';
 import {ConfirmService} from '../../services/confirm.service';
+import {AssetResponse} from '../../shared/model/asset-response';
+import {DialogComponent} from '../../shared/dialog/dialog.component';
+import {switchMap} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-  selector: 'app-asset-history',
-  templateUrl: './asset-history.component.html',
-  styleUrls: ['./asset-history.component.scss']
+  selector: 'app-asset-list',
+  templateUrl: './asset-list.component.html',
+  styleUrls: ['./asset-list.component.scss']
 })
-export class AssetHistoryComponent implements OnInit {
+export class AssetListComponent implements OnInit {
+
   displayedColumns: string[] = [
     'sNo',
     'assetTag',
     'model', 'ram', 'serialNumber',
-    'empId', 'name', 'dateAllocated', 'dateOfReturned',
-    'hostname', 'status', 'action'];
+    'dateOfPurchase', 'isUnderWarranty', 'isDamaged', 'isRepaired'];
 
   dataSource: MatTableDataSource<any>;
-  assetSummary: AssetDetails[] = [];
-  total = 0;
-  total4GB = 0;
-  total8GB = 0;
-  total16GB = 0;
-  assetResponse: ExcelData[] = [];
   newAssetDetails: Asset;
-  statuses = new Set();
   idColumn = 'sno';
   private dsData: any;
 
@@ -41,7 +33,6 @@ export class AssetHistoryComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private assetService: AssetService,
-              public datepipe: DatePipe,
               public dialog: MatDialog,
               public router: Router,
               public confirmService: ConfirmService) {
@@ -49,21 +40,7 @@ export class AssetHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.assetService.getSummary().subscribe(summary => {
-      summary.forEach(ss => {
-        this.statuses.add(ss.assetDetails.status);
-        this.assetSummary.push(ss.assetDetails);
-        this.total += ss.assetDetails.total;
-        this.total4GB += ss.assetDetails.ram4GB;
-        this.total8GB += ss.assetDetails.ram8GB;
-        this.total16GB += ss.assetDetails.ram16GB;
-      });
-
-      this.assetSummary.push(new AssetDetails('Total', '', this.total4GB, this.total8GB, this.total16GB, this.total));
-    });
-
     this.getAssetDetails();
-
   }
 
   applyFilter(filterValue: any) {
@@ -77,33 +54,6 @@ export class AssetHistoryComponent implements OnInit {
   getAssetDetails() {
     this.assetService.getAllAsset().subscribe(response => {
       const res = response as AssetResponse;
-      let cnt = 1;
-      res.data.forEach(value => {
-        const excelData = new ExcelData();
-        excelData.sNo = cnt++;
-       // excelData.empId = value.employee.empId;
-        //excelData.name = value.employee.firstName + ' ' + value.employee.lastName;
-        //excelData.location = value.employee.location;
-        //excelData.costCenter = value.employee.costCenter;
-        //excelData.productLine = value.employee.productLine;
-        //excelData.jobRole = value.employee.jobRole;
-        //excelData.technology = value.employee.technology;
-        excelData.model = value.model;
-        excelData.ram = value.ram;
-        excelData.serialNumber = value.serialNumber;
-        excelData.assetTag = value.assetTag;
-        //excelData.dateAllocated = this.datepipe.transform(value.dateAllocated, 'dd/MM/yyyy');
-        //excelData.dateReturned = this.datepipe.transform(value.dateOfReturn, 'dd/MM/yyyy');
-        excelData.hostname = value.hostname;
-        //excelData.status = value.status;
-        //excelData.remark = value.remark;
-
-        excelData.dateOfPurchase = value.dateOfPurchase;
-        excelData.isDamaged = value.isDamaged;
-        excelData.isRepaired = value.isRepaired;
-        excelData.isUnderWarranty = value.isUnderWarranty;
-        this.assetResponse.push(excelData);
-      });
       this.dataSource = new MatTableDataSource<any>(res.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

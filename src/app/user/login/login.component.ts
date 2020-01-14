@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
               private userAuth: UserAuthService) {
     // redirect to home if already logged in
     if (this.userAuth.currentUserValue) {
-      this.router.navigate(['asset/list']);
+      this.router.navigate(['asset/home']);
     }
   }
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(response));
         this.userAuth.currentUserSubject.next(response);
         // this.router.navigate(['home']);
-        this.router.navigate(['asset/list']);
+        this.router.navigate(['asset/home']);
         // location.href = 'http://localhost:4200/home';
       }, error => {
         this.errorMessage = 'Login failed, try again later.', error;

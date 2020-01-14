@@ -1,0 +1,87 @@
+<!--<button (click)="exportToExcel()" mat-flat-button color="primary" >Export As Excel</button> <br><br>-->
+<div class="">
+  <table>
+    <tr>
+      <td>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter i.e. Serial No/Asset Tag/Hostname">
+        </mat-form-field>
+      </td>
+      <!--<td>
+        <mat-form-field>
+          <mat-label>Asset Status</mat-label>
+          <mat-select (selectionChange)="applyFilter($event.value)">
+            <mat-option *ngFor="let status of statuses" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>-->
+    </tr>
+  </table>
+</div>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z18">
+
+  <ng-container matColumnDef="sNo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> sNo</th>
+    <td mat-cell *matCellDef="let element"> {{element.sno}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="ram">
+    <th mat-header-cell *matHeaderCellDef> RAM (in GB)</th>
+    <td mat-cell *matCellDef="let element"> {{element.ram}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Model</th>
+    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="serialNumber">
+    <th mat-header-cell *matHeaderCellDef> Serial Number</th>
+    <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateOfPurchase">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Purchase</th>
+    <td mat-cell *matCellDef="let element"> {{element.dateOfPurchase}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isUnderWarranty">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Under Warranty</th>
+    <td mat-cell *matCellDef="let element"> {{(element.isUnderWarranty) ? 'Yes' : 'No'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isDamaged">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Damaged</th>
+    <td mat-cell *matCellDef="let element"> {{(element.isDamaged) ? 'Yes' : 'No'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isRepaired">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Is Repaired</th>
+    <td mat-cell *matCellDef="let element"> {{(element.isRepaired) ? 'Yes' : 'No'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="assetTag">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> Asset Tag</th>
+    <td mat-cell *matCellDef="let element"> {{element.assetTag}} </td>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action</th>
+    <td mat-cell *matCellDef="let element">
+      <i class="action-icon fa fa-edit" (click)="editRecord(element)"></i>
+      <!--        <i class="action-icon fa fa-trash" (click)="deleteElement(element.sno)"></i>-->
+      <i class="action-icon fa fa-trash" (click)="deleteRecord(element.sno)"></i>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 100, 200]"></mat-paginator>

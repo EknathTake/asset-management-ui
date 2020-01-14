@@ -1,9 +1,8 @@
 import {Employee} from './employee';
 
 export class Asset {
-  sNo: number;
 
-  employee: Employee;
+  sNo: number;
 
   model: string;
 
@@ -13,14 +12,13 @@ export class Asset {
 
   assetTag: string;
 
-  dateAllocated: string;
-
-  dateOfReturn: string;
-
   hostname: string;
 
-  status: string;
+  dateOfPurchase: string;
 
-  remark: string;
+  isUnderWarranty: boolean;
 
+  isDamaged: boolean;
+
+  isRepaired: boolean;
 }

@@ -8,65 +8,9 @@
         fxLayoutAlign="center center" fxLayoutGap="10px">
     <mat-card-content>
 
-      <table class="full-width" cellspacing="0">
-        <tr>
-          <td> <!-- Employee Details-->
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Employee Id" [(ngModel)]="data.employee.empId" formControlName="empId" id="empId">
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="First Name" [(ngModel)]="data.employee.firstName" formControlName="firstName" id="firstName">
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Last Name" [(ngModel)]="data.employee.lastName" formControlName="lastName" id="lastName">
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
 
       <table class="full-width" cellspacing="0">
         <tr>
-          <td> <!-- Employee Details-->
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Location" [(ngModel)]="data.employee.location" formControlName="location" id="location">
-            </mat-form-field>
-
-          </td>
-          <td>
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Cost Center" [(ngModel)]="data.employee.costCenter" formControlName="costCenter" id="costCenter">
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-
-      <table class="full-width" cellspacing="0">
-        <tr>
-          <td> <!-- Employee Details-->
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Product Line" [(ngModel)]="data.employee.productLine" formControlName="productLine" id="productLine">
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Job Role" [(ngModel)]="data.employee.jobRole" formControlName="jobRole" id="jobRole">
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-
-      <table class="full-width" cellspacing="0">
-        <tr>
-          <td> <!-- Employee Details-->
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Technology" [(ngModel)]="data.employee.technology" formControlName="technology" id="technology">
-            </mat-form-field>
-
-          </td>
           <td>
             <!-- Asset Details -->
             <mat-form-field class="full-width">
@@ -107,43 +51,16 @@
         <tr>
           <td>
             <mat-form-field class="full-width">
-              <mat-label>Status</mat-label>
-              <mat-select [(value)]="data.status" [(ngModel)]="data.status" (selectionChange)="setVisibilityForDate($event)"
-                          formControlName="status"
-                          id="status">
-                <mat-option value="Allocated">Allocated</mat-option>
-                <mat-option value="Inventory">Inventory</mat-option>
-                <mat-option value="Inventory - not working">Inventory - not working</mat-option>
-              </mat-select>
-              <mat-error *ngIf="hasError('status', 'required')">status is required</mat-error>
+              <input matInput type="text" placeholder="Hostname" [(ngModel)]="data.hostname" formControlName="hostname" id="hostname">
             </mat-form-field>
           </td>
-
-          <td *ngIf="isAllocationDateVisible; else dateOfReturn" [(ngModel)]="data.dateAllocated"> <!-- Employee Details-->
+          <td>
             <mat-form-field class="full-width">
-              <input matInput [matDatepicker]="picker" [(ngModel)]="data.dateAllocated" placeholder="Date Allocated" formControlName="dateAllocated"
+              <input matInput [matDatepicker]="picker" [(ngModel)]="data.dateOfPurchase" placeholder="Date Allocated" formControlName="dateAllocated"
                      id="dateAllocated"
                      readonly (click)="picker.open()">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </td>
-          <td>
-            <ng-template #dateOfReturn>
-              <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="picker" placeholder="Date of Return" [(ngModel)]="data.dateOfReturn" formControlName="dateOfReturn"
-                       id="dateOfReturn"
-                       readonly (click)="picker.open()">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-            </ng-template>
-          </td>
-
-
-          <td>
-            <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Hostname" [(ngModel)]="data.hostname" formControlName="hostname" id="hostname">
             </mat-form-field>
           </td>
         </tr>
@@ -152,14 +69,39 @@
       <table class="full-width" cellspacing="0">
         <tr>
           <td>
-            <!-- Asset Details -->
             <mat-form-field class="full-width">
-              <input matInput type="text" placeholder="Remark" [(ngModel)]="data.remark" formControlName="remark" id="remark">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="isUnderWarranty"
+                          id="isUnderWarranty">
+                <mat-option value="true">Yes</mat-option>
+                <mat-option value="false">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="isDamaged"
+                          id="isDamaged">
+                <mat-option value="true">Yes</mat-option>
+                <mat-option value="false">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="isRepaired"
+                          id="isRepaired">
+                <mat-option value="true">Yes</mat-option>
+                <mat-option value="false">No</mat-option>
+              </mat-select>
             </mat-form-field>
           </td>
         </tr>
       </table>
-
     </mat-card-content>
     <mat-card-actions align="center">
       <button mat-raised-button color="primary" [disabled]="!assetForm.valid" [mat-dialog-close]="data.model" cdkFocusInitial>Summit</button>

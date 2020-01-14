@@ -13,8 +13,6 @@ export class AssetEntryComponent implements OnInit {
   public assetForm: FormGroup;
   private dialogConfig;
   public message: string;
-  selectedStatus = 'Allocated';
-  isAllocationDateVisible = false;
 
   constructor(private dialog: MatDialog, private assetService: AssetService) {
   }
@@ -52,25 +50,15 @@ export class AssetEntryComponent implements OnInit {
   private executeAssetCreation = (assetForm) => {
     const asset: Asset = {
       sNo: 0,
-      employee: {
-        empId: assetForm.empId,
-        firstName: assetForm.firstName,
-        lastName: assetForm.lastName,
-        location: assetForm.location,
-        costCenter: assetForm.costCenter,
-        productLine: assetForm.productLine,
-        jobRole: assetForm.jobRole,
-        technology: assetForm.technology,
-      },
       model: assetForm.model,
       ram: assetForm.ram,
       serialNumber: assetForm.serialNumber,
       assetTag: assetForm.assetTag,
-      dateAllocated: assetForm.dateAllocated,
-      dateOfReturn: assetForm.dateOfReturn,
-      status: assetForm.status,
       hostname: assetForm.hostname,
-      remark: assetForm.remark
+      dateOfPurchase: assetForm.dateOfPurchase,
+      isDamaged: assetForm.isDamaged,
+      isRepaired: assetForm.isRepaired,
+      isUnderWarranty: assetForm.isUnderWarranty
     };
 
     this.assetService.createAsset(asset)
@@ -80,11 +68,4 @@ export class AssetEntryComponent implements OnInit {
       );
   }
 
-  setVisibilityForDate(event) {
-    if (this.selectedStatus === 'Allocated') {
-      this.isAllocationDateVisible = true;
-    } else {
-      this.isAllocationDateVisible = false;
-    }
-  }
 }

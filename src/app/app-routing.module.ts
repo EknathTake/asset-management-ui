@@ -4,6 +4,9 @@ import {LoginComponent} from './user/login/login.component';
 import {AssetEntryComponent} from './asset/asset-entry/asset-entry.component';
 import {AssetHistoryComponent} from './asset/asset-history/asset-history.component';
 import {AssetSummaryComponent} from './asset/asset-summary/asset-summary.component';
+import {AssetListComponent} from './asset/asset-list/asset-list.component';
+import {AssetHomeComponent} from './asset/asset-home/asset-home.component';
+import {AssetAssignComponent} from './asset/asset-assign/asset-assign.component';
 
 
 const routes: Routes = [{
@@ -22,8 +25,17 @@ const routes: Routes = [{
   path: 'asset/create',
   component: AssetEntryComponent
 }, {
-  path: 'asset/hostory',
+  path: 'asset/history',
   component: AssetHistoryComponent
+}, {
+  path: 'asset/list',
+  component: AssetListComponent
+}, {
+  path: 'asset/home',
+  component: AssetHomeComponent
+}, {
+  path: 'asset/assign',
+  component: AssetAssignComponent
 }, {
   path: 'asset/summary',
   component: AssetSummaryComponent

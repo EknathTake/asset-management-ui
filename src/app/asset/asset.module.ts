@@ -10,11 +10,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {CommonModule, DatePipe} from '@angular/common';
 import {ConfirmService} from '../services/confirm.service';
 import {ConfirmBoxComponent} from '../shared/confirm-box/confirm-box.component';
+import { AssetListComponent } from './asset-list/asset-list.component';
+import { AssetHomeComponent } from './asset-home/asset-home.component';
+import { AssetAssignComponent } from './asset-assign/asset-assign.component';
 
 
 
 @NgModule({
-  declarations: [AssetEntryComponent, AssetHistoryComponent, AssetSummaryComponent],
+  declarations: [AssetEntryComponent, AssetHistoryComponent, AssetSummaryComponent, AssetListComponent, AssetHomeComponent, AssetAssignComponent],
   imports: [
     MaterialModule,
     FormsModule,
