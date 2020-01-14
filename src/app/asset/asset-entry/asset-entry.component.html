@@ -8,94 +8,16 @@
           fxLayout="column wrap"
           fxLayoutAlign="center center" fxLayoutGap="10px">
       <mat-card-content>
-
         <table class="full-width" cellspacing="0">
           <tr>
-            <td> <!-- Employee Details-->
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Employee Id" formControlName="empId" id="empId">
-              </mat-form-field>
-            </td>
             <td>
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="First Name" formControlName="firstName" id="firstName">
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Last Name" formControlName="lastName" id="lastName">
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td> <!-- Employee Details-->
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Location" formControlName="location" id="location">
-              </mat-form-field>
-
-            </td>
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Cost Center" formControlName="costCenter" id="costCenter">
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td> <!-- Employee Details-->
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Product Line" formControlName="productLine" id="productLine">
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Job Role" formControlName="jobRole" id="jobRole">
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td> <!-- Employee Details-->
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Technology" formControlName="technology" id="technology">
-              </mat-form-field>
-
-            </td>
-            <td>
-              <!-- Asset Details -->
               <mat-form-field class="full-width">
                 <input matInput type="text" placeholder="Model" formControlName="model" id="model">
                 <mat-error *ngIf="hasError('model', 'required')">model is required</mat-error>
               </mat-form-field>
             </td>
-          </tr>
-        </table>
 
-        <table class="full-width" cellspacing="0">
-          <tr>
-            <td> <!-- Asset Details -->
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="RAM" formControlName="ram" id="ram">
-                <mat-error *ngIf="hasError('ram', 'required')">ram is required</mat-error>
-              </mat-form-field>
-            </td>
-            <td> <!-- Employee Details-->
-              <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Serial Number" formControlName="serialNumber"
-                       id="serialNumber">
-                <mat-error *ngIf="hasError('serialNumber', 'required')">serialNumber is required</mat-error>
-              </mat-form-field>
-
-            </td>
             <td>
-
               <mat-form-field class="full-width">
                 <input matInput type="text" placeholder="Asset Tag" formControlName="assetTag" id="assetTag">
                 <mat-error *ngIf="hasError('assetTag', 'required')">assetTag is required</mat-error>
@@ -108,43 +30,15 @@
           <tr>
             <td>
               <mat-form-field class="full-width">
-                <mat-label>Status</mat-label>
-                <mat-select [(value)]="selectedStatus" (selectionChange)="setVisibilityForDate($event)"
-                            formControlName="status"
-                            id="status">
-                  <mat-option value="Allocated">Allocated</mat-option>
-                  <mat-option value="Inventory">Inventory</mat-option>
-                  <mat-option value="Inventory - not working">Inventory - not working</mat-option>
-                </mat-select>
-                <mat-error *ngIf="hasError('status', 'required')">status is required</mat-error>
-              </mat-form-field>
-            </td>
-
-            <td *ngIf="isAllocationDateVisible; else dateOfReturn"> <!-- Employee Details-->
-              <mat-form-field class="full-width">
-                <input matInput [matDatepicker]="picker" placeholder="Date Allocated" formControlName="dateAllocated"
-                       id="dateAllocated"
-                       readonly (click)="picker.open()">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input matInput type="text" placeholder="RAM" formControlName="ram" id="ram">
+                <mat-error *ngIf="hasError('ram', 'required')">ram is required</mat-error>
               </mat-form-field>
             </td>
             <td>
-              <ng-template #dateOfReturn>
-                <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="picker" placeholder="Date of Return" formControlName="dateOfReturn"
-                         id="dateOfReturn"
-                         readonly (click)="picker.open()">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </ng-template>
-            </td>
-
-
-            <td>
               <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Hostname" formControlName="hostname" id="hostname">
+                <input matInput type="text" placeholder="Serial Number" formControlName="serialNumber"
+                       id="serialNumber">
+                <mat-error *ngIf="hasError('serialNumber', 'required')">serialNumber is required</mat-error>
               </mat-form-field>
             </td>
           </tr>
@@ -153,10 +47,45 @@
         <table class="full-width" cellspacing="0">
           <tr>
             <td>
-              <!-- Asset Details -->
               <mat-form-field class="full-width">
-                <input matInput type="text" placeholder="Remark" formControlName="remark" id="remark">
-                <mat-error *ngIf="hasError('model', 'required')">firstName is required</mat-error>
+                <input matInput [matDatepicker]="picker" placeholder="Date of Purchase" formControlName="dateOfPurchase"
+                       id="dateOfPurchase"
+                       readonly (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Is Under Warranty</mat-label>
+                <mat-select formControlName="isUnderWarranty"
+                            id="isUnderWarranty">
+                  <mat-option value="true">Yes</mat-option>
+                  <mat-option value="false">No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('isUnderWarranty', 'required')">Please select given asset is under warrenty or not.</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Is Damaged</mat-label>
+                <mat-select formControlName="isDamaged"
+                            id="isDamaged">
+                  <mat-option value="true">Yes</mat-option>
+                  <mat-option value="false">No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('isDamaged', 'required')">Please select given asset is damaged or not.</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="full-width">
+                <mat-label>Is Repaired</mat-label>
+                <mat-select formControlName="isRepaired"
+                            id="isRepaired">
+                  <mat-option value="true">Yes</mat-option>
+                  <mat-option value="false">No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasError('isDamaged', 'required')">Please select given asset is repaired or not.</mat-error>
               </mat-form-field>
             </td>
           </tr>

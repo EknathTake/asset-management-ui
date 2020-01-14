@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AssetEntryComponent } from './asset-entry/asset-entry.component';
-import { AssetListComponent } from './asset-list/asset-list.component';
+import { AssetHistoryComponent } from './asset-history/asset-history.component';
 import {MaterialModule} from '../material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
@@ -14,7 +14,7 @@ import {ConfirmBoxComponent} from '../shared/confirm-box/confirm-box.component';
 
 
 @NgModule({
-  declarations: [AssetEntryComponent, AssetListComponent, AssetSummaryComponent],
+  declarations: [AssetEntryComponent, AssetHistoryComponent, AssetSummaryComponent],
   imports: [
     MaterialModule,
     FormsModule,

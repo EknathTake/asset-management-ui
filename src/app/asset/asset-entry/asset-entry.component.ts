@@ -10,7 +10,6 @@ import {AssetService} from '../../services/asset.service';
   styleUrls: ['./asset-entry.component.scss']
 })
 export class AssetEntryComponent implements OnInit {
-  /** form group*/
   public assetForm: FormGroup;
   private dialogConfig;
   public message: string;
@@ -22,24 +21,14 @@ export class AssetEntryComponent implements OnInit {
 
   ngOnInit() {
     this.assetForm = new FormGroup({
-      empId: new FormControl('', []),
-      firstName: new FormControl('', []),
-      lastName: new FormControl('', []),
-      location: new FormControl('', []),
-      costCenter: new FormControl('', []),
-      productLine: new FormControl('', []),
-      jobRole: new FormControl('', []),
-      technology: new FormControl('', []),
       model: new FormControl('', [Validators.required]),
       ram: new FormControl('', [Validators.required]),
       serialNumber: new FormControl('', [Validators.required]),
       assetTag: new FormControl('', [Validators.required]),
-      dateAllocated: new FormControl('', []),
-      dateOfReturn: new FormControl('', []),
-      hostname: new FormControl('', []),
-      status: new FormControl('', [Validators.required]),
-      remark: new FormControl('', [])
-      // address: new FormControl('', [Validators.required, Validators.maxLength(100)])
+      dateOfPurchase: new FormControl('', [Validators.required]),
+      isUnderWarranty: new FormControl('', [Validators.required]),
+      isDamaged: new FormControl('', [Validators.required]),
+      isRepaired: new FormControl('', [Validators.required])
     });
 
     this.dialogConfig = {

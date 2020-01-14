@@ -9,22 +9,20 @@ import {DialogComponent} from '../../shared/dialog/dialog.component';
 import {Asset} from '../../shared/model/asset';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
-import { switchMap } from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {ConfirmService} from '../../services/confirm.service';
 
 @Component({
   selector: 'app-asset-list',
-  templateUrl: './asset-list.component.html',
-  styleUrls: ['./asset-list.component.scss']
+  templateUrl: './asset-history.component.html',
+  styleUrls: ['./asset-history.component.scss']
 })
-export class AssetListComponent implements OnInit {
+export class AssetHistoryComponent implements OnInit {
   displayedColumns: string[] = [
     'sNo',
-    'empId',
-    'name',
-    'jobRole',
+    'assetTag',
     'model', 'ram', 'serialNumber',
-    'assetTag', 'dateAllocated', 'dateOfReturned',
+    'empId', 'name', 'dateAllocated', 'dateOfReturned',
     'hostname', 'status', 'action'];
 
   dataSource: MatTableDataSource<any>;

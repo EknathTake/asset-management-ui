@@ -1,9 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './user/login/login.component';
-import {HomePageComponent} from './user/home-page/home-page.component';
 import {AssetEntryComponent} from './asset/asset-entry/asset-entry.component';
-import {AssetListComponent} from './asset/asset-list/asset-list.component';
+import {AssetHistoryComponent} from './asset/asset-history/asset-history.component';
 import {AssetSummaryComponent} from './asset/asset-summary/asset-summary.component';
 
 
@@ -18,13 +17,13 @@ const routes: Routes = [{
   component: LoginComponent
 }, {
   path: 'home',
-  component: AssetListComponent
+  component: AssetHistoryComponent
 }, {
   path: 'asset/create',
   component: AssetEntryComponent
 }, {
-  path: 'asset/list',
-  component: AssetListComponent
+  path: 'asset/hostory',
+  component: AssetHistoryComponent
 }, {
   path: 'asset/summary',
   component: AssetSummaryComponent

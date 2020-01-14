@@ -6,11 +6,21 @@
       <!-- Asset Dropdown -->
       <li *ngIf="isLogedIn" class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Assets <i class="fa fa-laptop" aria-hidden="true"></i><span class="caret"></span></a>
+          Asset's <i class="fa fa-laptop" aria-hidden="true"></i><span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/list"><i class="fa fa-list" aria-hidden="true"></i> All Assets</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/history"><i class="fa fa-list" aria-hidden="true"></i> History</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/create"><i class="fa fa-plus" aria-hidden="true"></i> Add Asset </a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/#"><i class="fa fa-check-square-o" aria-hidden="true"></i> Assign Asset </a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="/asset/summary"><i class="fa fa-pie-chart" aria-hidden="true"></i> Asset Summary</a>
+        </div>
+      </li>
+
+      <li *ngIf="isLogedIn" class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Employee's <i class="fa fa-laptop" aria-hidden="true"></i><span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/#"><i class="fa fa-list" aria-hidden="true"></i> List All Employees</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/#"><i class="fa fa-plus" aria-hidden="true"></i> Add Employee </a>
         </div>
       </li>
 

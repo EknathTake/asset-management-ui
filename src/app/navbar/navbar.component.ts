@@ -60,6 +60,12 @@ export class NavbarComponent implements OnInit {
       res.data.forEach(value => {
         const excelData = new ExcelData();
         excelData.sNo = cnt++;
+        excelData.assetTag = value.assetTag;
+        excelData.model = value.model;
+        excelData.ram = value.ram;
+        excelData.serialNumber = value.serialNumber;
+        excelData.dateAllocated = this.datepipe.transform(value.dateAllocated, 'dd/MM/yyyy');
+        excelData.dateReturned = this.datepipe.transform(value.dateOfReturn, 'dd/MM/yyyy');
         excelData.empId = value.employee.empId;
         excelData.name = value.employee.firstName + ' ' + value.employee.lastName;
         excelData.location = value.employee.location;
@@ -67,12 +73,6 @@ export class NavbarComponent implements OnInit {
         excelData.productLine = value.employee.productLine;
         excelData.jobRole = value.employee.jobRole;
         excelData.technology = value.employee.technology;
-        excelData.model = value.model;
-        excelData.ram = value.ram;
-        excelData.serialNumber = value.serialNumber;
-        excelData.assetTag = value.assetTag;
-        excelData.dateAllocated = this.datepipe.transform(value.dateAllocated, 'dd/MM/yyyy');
-        excelData.dateReturned = this.datepipe.transform(value.dateOfReturn, 'dd/MM/yyyy');
         excelData.hostname = value.hostname;
         excelData.status = value.status;
         excelData.remark = value.remark;
