@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AssetService} from '../../services/asset.service';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {AssetDetails} from '../../shared/model/asset-details';
-import {ExcelData} from '../../shared/model/excel-data';
 import {Asset} from '../../shared/model/asset';
 import {Router} from '@angular/router';
 import {ConfirmService} from '../../services/confirm.service';
@@ -10,6 +8,8 @@ import {AssetResponse} from '../../shared/model/asset-response';
 import {DialogComponent} from '../../shared/dialog/dialog.component';
 import {switchMap} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
+import {SelectionModel} from '@angular/cdk/collections';
+
 
 @Component({
   selector: 'app-asset-list',
@@ -19,18 +19,19 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class AssetListComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'sNo',
     'assetTag',
     'model', 'ram', 'serialNumber',
-    'dateOfPurchase', 'isUnderWarranty', 'isDamaged', 'isRepaired'];
+    'dateOfPurchase', 'isUnderWarranty', 'isDamaged', 'isRepaired', 'status'];
 
   dataSource: MatTableDataSource<any>;
   newAssetDetails: Asset;
-  idColumn = 'sno';
+  selectedAssetToAssign: Asset;
+  idColumn = 'sNo';
   private dsData: any;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  selection = new SelectionModel<Asset>(false, []);
 
   constructor(private assetService: AssetService,
               public dialog: MatDialog,
@@ -64,7 +65,7 @@ export class AssetListComponent implements OnInit {
     const record = this.dataSource.data.find(obj => obj[this.idColumn] === element.sno);
     if (record) {
       const dialogRef = this.dialog.open(DialogComponent, {
-        width: '37%',
+        width: '100%',
         data: element
       });
 
@@ -108,6 +109,18 @@ export class AssetListComponent implements OnInit {
     const itemIndex = this.dsData.findIndex(obj => obj[idColumn] === recordId);
     dataSource.data.splice(itemIndex, 1);
     dataSource.paginator = paginator;
+  }
+
+  assignAsset() {
+    this.selection.selected.forEach(ss => this.selectedAssetToAssign = ss);
+    if (this.selectedAssetToAssign) {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '80%%',
+        data: this.selectedAssetToAssign
+      });
+    } else {
+      window.alert('Select asset first!');
+    }
   }
 }
 

@@ -58,34 +58,38 @@
             <td>
               <mat-form-field class="full-width">
                 <mat-label>Is Under Warranty</mat-label>
-                <mat-select formControlName="isUnderWarranty"
+                <mat-select formControlName="isUnderWarranty" [(value)]="isUnderWarranty"
                             id="isUnderWarranty">
                   <mat-option value="true">Yes</mat-option>
                   <mat-option value="false">No</mat-option>
                 </mat-select>
-                <mat-error *ngIf="hasError('isUnderWarranty', 'required')">Please select given asset is under warrenty or not.</mat-error>
+                <mat-error *ngIf="hasError('isUnderWarranty', 'required')">Please select given asset is under warrenty
+                  or not.
+                </mat-error>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="full-width">
                 <mat-label>Is Damaged</mat-label>
-                <mat-select formControlName="isDamaged"
+                <mat-select formControlName="isDamaged" [(value)]="isDamaged"
                             id="isDamaged">
                   <mat-option value="true">Yes</mat-option>
                   <mat-option value="false">No</mat-option>
                 </mat-select>
-                <mat-error *ngIf="hasError('isDamaged', 'required')">Please select given asset is damaged or not.</mat-error>
+                <mat-error *ngIf="hasError('isDamaged', 'required')">Please select given asset is damaged or not.
+                </mat-error>
               </mat-form-field>
             </td>
             <td>
               <mat-form-field class="full-width">
                 <mat-label>Is Repaired</mat-label>
-                <mat-select formControlName="isRepaired"
+                <mat-select formControlName="isRepaired" [(value)]="isRepaired"
                             id="isRepaired">
                   <mat-option value="true">Yes</mat-option>
                   <mat-option value="false">No</mat-option>
                 </mat-select>
-                <mat-error *ngIf="hasError('isDamaged', 'required')">Please select given asset is repaired or not.</mat-error>
+                <mat-error *ngIf="hasError('isDamaged', 'required')">Please select given asset is repaired or not.
+                </mat-error>
               </mat-form-field>
             </td>
           </tr>

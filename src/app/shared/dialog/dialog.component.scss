@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+.full-width{
+  width: 100%;
+}
+::ng-deep .mat-datepicker-content{
+ margin-left: 73%;
+}
+
+.mat-row.hovered {
+  background: #eee;
+}
+
+.mat-row.highlighted {
+  background: #999;
+}

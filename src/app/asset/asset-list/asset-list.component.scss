@@ -1,3 +1,13 @@
 table{
   width: 100%;
 }
+.align-right{
+  float: right;
+}
+.mat-row.hovered {
+  background: #eee;
+}
+
+.mat-row.highlighted {
+  background: #999;
+}

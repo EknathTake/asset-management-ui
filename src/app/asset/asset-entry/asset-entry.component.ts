@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSelectChange} from '@angular/material';
 import {Asset} from '../../shared/model/asset';
 import {AssetService} from '../../services/asset.service';
 
@@ -13,6 +13,10 @@ export class AssetEntryComponent implements OnInit {
   public assetForm: FormGroup;
   private dialogConfig;
   public message: string;
+  public isUnderWarranty = false;
+  public isDamaged = false;
+  public isRepaired = false;
+
 
   constructor(private dialog: MatDialog, private assetService: AssetService) {
   }
@@ -56,9 +60,9 @@ export class AssetEntryComponent implements OnInit {
       assetTag: assetForm.assetTag,
       hostname: assetForm.hostname,
       dateOfPurchase: assetForm.dateOfPurchase,
-      isDamaged: assetForm.isDamaged,
-      isRepaired: assetForm.isRepaired,
-      isUnderWarranty: assetForm.isUnderWarranty
+      isDamaged: this.isDamaged,
+      isRepaired: this.isRepaired,
+      isUnderWarranty: this.isUnderWarranty
     };
 
     this.assetService.createAsset(asset)
@@ -67,5 +71,4 @@ export class AssetEntryComponent implements OnInit {
         error => this.message = 'Error occured while creating Asset entry.'
       );
   }
-
 }
