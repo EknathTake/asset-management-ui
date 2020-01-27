@@ -4,13 +4,14 @@ import {MaterialModule} from '../material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
 import {HttpClientModule} from '@angular/common/http';
-import {AddEmployeeComponent} from './add-employee/add-employee.component';
-import {ListEmployeeComponent} from './list-employee/list-employee.component';
+import { EmployeeAddComponent } from './employee-add/employee-add.component';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 
 @NgModule({
-  declarations: [AddEmployeeComponent,
-    ListEmployeeComponent],
+  declarations: [
+    EmployeeAddComponent,
+    EmployeeListComponent],
   imports: [
     MaterialModule,
     FormsModule,
@@ -18,6 +19,9 @@ import {ListEmployeeComponent} from './list-employee/list-employee.component';
     DataTablesModule,
     HttpClientModule,
     CommonModule
+  ],
+  exports: [
+    EmployeeAddComponent, EmployeeListComponent
   ]
 })
 export class EmployeeModule {
