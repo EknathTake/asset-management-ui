@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Asset} from '../model/asset';
 
 @Component({
   selector: 'app-confirm-box',
@@ -8,8 +9,10 @@ import {MatDialogRef} from '@angular/material';
 })
 export class ConfirmBoxComponent   {
 
+
+
   public title: string;
   public message: string;
 
-  constructor(public dialogRef: MatDialogRef<ConfirmBoxComponent>) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ConfirmBoxComponent>) {}
 }

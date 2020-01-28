@@ -8,6 +8,7 @@ import {EmployeeService} from '../../services/employee.service';
 import {AssetHistory} from '../model/asset-history';
 import {SelectionModel} from '@angular/cdk/collections';
 import {AssetHistoryService} from '../../services/asset-history.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dialog',
@@ -19,7 +20,6 @@ export class DialogComponent implements OnInit {
 
   public message: string;
   selectedAssetStatus = 'ALLOCATED';
-  displayedColumns: string[] = ['empId', 'fullName', 'location', 'costCenter', 'productLine', 'jobRole', 'technology'];
 
   dataSource: MatTableDataSource<Employee>;
 
@@ -33,7 +33,8 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Asset,
     private assetService: AssetService,
     private employeeService: EmployeeService,
-    private assetHistoryService: AssetHistoryService) {
+    private assetHistoryService: AssetHistoryService,
+    private route: Router) {
 
     this.assetAssignForm = new FormGroup({
       assetStatus: new FormControl('', [Validators.required]),
@@ -72,9 +73,10 @@ export class DialogComponent implements OnInit {
   }
 
   public assetAssign = (assetFormValue) => {
-    debugger;
     if (this.assetAssignForm.valid) {
       this.executeAssetAssigning(assetFormValue);
+      this.dialogRef.close();
+      this.route.navigateByUrl('asset/history');
     }
   }
 

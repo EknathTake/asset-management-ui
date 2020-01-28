@@ -5,6 +5,7 @@ import {AssetModule} from '../asset/asset.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogComponent } from './dialog/dialog.component';
 import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
+import {EmployeeModule} from '../employee/employee.module';
 
 
 
@@ -15,7 +16,8 @@ import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
     AssetModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EmployeeModule
   ],
   entryComponents: [
     DialogComponent

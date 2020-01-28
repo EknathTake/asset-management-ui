@@ -6,6 +6,7 @@ import {DataTablesModule} from 'angular-datatables';
 import {HttpClientModule} from '@angular/common/http';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import {ConfirmBoxComponent} from '../shared/confirm-box/confirm-box.component';
 
 
 @NgModule({
@@ -19,6 +20,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     DataTablesModule,
     HttpClientModule,
     CommonModule
+  ], entryComponents: [
+    ConfirmBoxComponent
   ],
   exports: [
     EmployeeAddComponent, EmployeeListComponent

@@ -22,4 +22,10 @@ export class EmployeeService {
       headers: this.header
     });
   }
+
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.baseUrl$ + '/employee', employee, {
+      headers: this.header
+    });
+  }
 }

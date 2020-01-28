@@ -7,6 +7,8 @@ import {AssetSummaryComponent} from './asset/asset-summary/asset-summary.compone
 import {AssetListComponent} from './asset/asset-list/asset-list.component';
 import {AssetHomeComponent} from './asset/asset-home/asset-home.component';
 import {AssetAssignComponent} from './asset/asset-assign/asset-assign.component';
+import {EmployeeAddComponent} from './employee/employee-add/employee-add.component';
+import {EmployeeListComponent} from './employee/employee-list/employee-list.component';
 
 
 const routes: Routes = [{
@@ -39,6 +41,12 @@ const routes: Routes = [{
 }, {
   path: 'asset/summary',
   component: AssetSummaryComponent
+}, {
+  path: 'employee/add',
+  component: EmployeeAddComponent
+}, {
+  path: 'employee/list',
+  component: EmployeeListComponent
 }];
 
 @NgModule({

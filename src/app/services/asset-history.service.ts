@@ -18,4 +18,8 @@ export class AssetHistoryService {
   createAsset(assetHistory: AssetHistory) {
     return this.http.post(this.baseUrl$ + '/history', assetHistory, {headers: this.header});
   }
+
+  getAllAssetHistory(){
+    return this.http.get(this.baseUrl$ + '/history', {headers: this.header})
+  }
 }

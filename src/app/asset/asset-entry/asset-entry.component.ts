@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatSelectChange} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {Asset} from '../../shared/model/asset';
 import {AssetService} from '../../services/asset.service';
+import {ConfirmBoxComponent} from '../../shared/confirm-box/confirm-box.component';
 
 @Component({
   selector: 'app-asset-entry',
@@ -12,7 +13,6 @@ import {AssetService} from '../../services/asset.service';
 export class AssetEntryComponent implements OnInit {
   public assetForm: FormGroup;
   private dialogConfig;
-  public message: string;
   public isUnderWarranty = false;
   public isDamaged = false;
   public isRepaired = false;
@@ -67,8 +67,24 @@ export class AssetEntryComponent implements OnInit {
 
     this.assetService.createAsset(asset)
       .subscribe(
-        res => this.message = 'Asset entry created successfully',
-        error => this.message = 'Error occured while creating Asset entry.'
+        res => {
+          this.dialog.open(ConfirmBoxComponent, {
+            width: '40%%',
+            data: {
+              title: 'Success',
+              message: 'Asset entry created successfully!'
+            }
+          });
+        },
+        error => {
+          this.dialog.open(ConfirmBoxComponent, {
+            width: '40%%',
+            data: {
+              title: 'Error',
+              message: 'Error occured while creating Asset entry: ' + error
+            }
+          });
+        }
       );
   }
 }

@@ -1,1 +1,87 @@
-<p>employee-add works!</p>
+<section fxLayout="row wrap" fxLayoutAlign="center center" class="">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Add Employee</mat-card-title>
+    <br>
+    <form [formGroup]="employeeForm" class="employee-form" autocomplete="off" novalidate
+          (ngSubmit)="createEmployeeEntry(employeeForm.value)"
+          fxLayout="column wrap"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <table class="full-width" cellspacing="0">
+          <tr>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Employee Id" formControlName="empId" id="empId">
+                <mat-error *ngIf="hasError('empId', 'required')">empId is required</mat-error>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Firstname" formControlName="firstName" id="firstName">
+                <mat-error *ngIf="hasError('firstName', 'required')">firstname is required</mat-error>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Last name" formControlName="lastName" id="lastName">
+                <mat-error *ngIf="hasError('lastName', 'required')">last is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Location" formControlName="location" id="location">
+                <mat-error *ngIf="hasError('location', 'required')">location is required</mat-error>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Cost Center" formControlName="costCenter" id="costCenter">
+                <mat-error *ngIf="hasError('costCenter', 'required')">costCenter is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <table class="full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Product Line" formControlName="productLine" id="productLine">
+                <mat-error *ngIf="hasError('productLine', 'required')">productLine is required</mat-error>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Job Role" formControlName="jobRole" id="jobRole">
+                <mat-error *ngIf="hasError('jobRole', 'required')">jobRole is required</mat-error>
+              </mat-form-field>
+            </td>
+
+            <td>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Technology" formControlName="technology" id="technology">
+                <mat-error *ngIf="hasError('technology', 'required')">technology is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+
+
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!employeeForm.valid">Create</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
